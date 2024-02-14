@@ -10,7 +10,8 @@ print(f"Loading deck at path: {src.deck.PATH}")
 
 if '--update' in args or '-u' in args: src.database.Update()
 
-myDeck = src.deck.Load({'name': src.deck.PATH.replace('.txt','')})
+if src.database.isURL: myDeck = src.deck.Load({'name': args[-1].split('/')[-1]})
+else: myDeck = src.deck.Load({'name': src.deck.PATH.replace('.txt','')})
 
 pdf = src.pdf.Make(myDeck)
 
