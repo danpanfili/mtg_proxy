@@ -1,15 +1,20 @@
 import src.database as db
+import requests
+
+isURL = False
 
 def Load(info={}):
-    with open(PATH, 'r') as file:
-        deck_text = file.readlines()
+    if isURL: deck_text = requests.get(PATH).text.replace('\r','').splitlines()
+    else:
+        with open(PATH, 'r') as file:
+            deck_text = file.readlines()
     
     deck = {
         'info':info,
         'card':[]}
     
     for line in deck_text:
-        if line == '\n': continue
+        if line == '\n' or line == '': continue
 
         line = line.split(' ')
         copies = int(line[0])
@@ -19,4 +24,3 @@ def Load(info={}):
             deck['card'] += [db.CARDS[key[0]][0]]
 
     return deck
-
