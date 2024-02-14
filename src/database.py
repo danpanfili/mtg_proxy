@@ -1,4 +1,4 @@
-import pickle, requests
+import pickle, requests, os
 
 def Download(bulk_url = r'https://api.scryfall.com/bulk-data/default-cards/'):
     print("Downloading most recent database...")
@@ -28,10 +28,10 @@ def Update(filename = 'src/cards.pkl'):
 
 def Load(filename = 'src/cards.pkl'):
     print("Loading Database...")
-    try:
+    if os.path.exists(filename):
         with open(filename, 'rb') as file:
             return pickle.load(file)
-    except:
-        return Update(filename)
+    else:
+        return Download(filename)
     
 CARDS = Load()
