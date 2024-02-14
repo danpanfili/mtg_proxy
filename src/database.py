@@ -7,7 +7,7 @@ def Download(bulk_url = r'https://api.scryfall.com/bulk-data/default-cards/'):
     
     return requests.get(download_url).json()
 
-def Update(filename = 'src/cards.pkl'):
+def Update(filename = 'mtg_proxy/src/cards.pkl'):
     print("Updating local database...")
 
     database = Download()
@@ -26,7 +26,7 @@ def Update(filename = 'src/cards.pkl'):
 
     return cards
 
-def Load(filename = 'src/cards.pkl'):
+def Load(filename = 'mtg_proxy/src/cards.pkl'):
     print("Loading Database...")
     if os.path.exists(filename):
         with open(filename, 'rb') as file:
