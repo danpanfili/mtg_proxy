@@ -32,6 +32,6 @@ def Load(filename = 'src/cards.pkl'):
         with open(filename, 'rb') as file:
             return pickle.load(file)
     else:
-        return Download(filename)
+        return Download()
     
 CARDS = Load()
